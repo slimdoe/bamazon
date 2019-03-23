@@ -1,4 +1,4 @@
-USE Great_BayDB;
+USE bamazon_DB;
 CREATE TABLE customer_order
 (
     id INT NOT NULL
