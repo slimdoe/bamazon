@@ -1,2 +1,2 @@
 # bamazon
-bamazon HW
+bamazon 10HW
