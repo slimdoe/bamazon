@@ -1,6 +1,6 @@
 var mysql = require('mysql');
 
-var inquirer = require ('inquirer');
+var inquirer = require('inquirer');
 
 var connection = mysql.createConnection({
     host: 'localhost',
@@ -34,46 +34,46 @@ connection.connect(function (err) {
 
         }
         function start() {
-            connection.query("SELECT * FROM products", function(err, res) {
+            connection.query("SELECT * FROM products", function (err, res) {
                 if (err) throw err;
-            inquirer
-              .prompt([
-                  {
-                    type: "input",
-                    message: "\nEnter the ID of the item you want to purchase.",
-                    name: "itemId"
-                  },
-                  {
-                    type: "input",
-                    message: "How many units do you want to purchase?\n",
-                    name: "amount"
-                  }
-         
+                inquirer
+                    .prompt([
+                        {
+                            type: "input",
+                            message: "\nEnter the ID of the item you want to purchase.",
+                            name: "itemId"
+                        },
+                        {
+                            type: "input",
+                            message: "How many units do you want to purchase?\n",
+                            name: "amount"
+                        }
+         console.log(start)
               ])
-              .then(function(answer) {
-                for (var i = 0; i < res.length; i++) {
-         
-                    chosenItem = res[i].product_name;
-                    if (res[i].item_id == answer.itemId && res[i].stock_quantity>=answer.amount) {
-                      //chosenAmount= answer.amount;
-                      console.log("You want to buy " + parseFloat(answer.amount)+" "+ chosenItem);
-                      start();
-         
-                    }else if(res[i].item_id == answer.itemId && res[i].stock_quantity<<answer.amount){
-                        console.log("Sorry we don't have enough "+chosenItem+". There are only "+res[i].stock_quantity+" available.");
-                        start();
-                   }
-         
-                  }
-              });
-          });
-         };
+                .then(function (answer) {
+                    for (var i = 0; i < res.length; i++) {
 
-        
-       
+                        chosenItem = res[i].product_name;
+                        if (res[i].item_id == answer.itemId && res[i].stock_quantity >= answer.amount) {
+                            //chosenAmount= answer.amount;
+                            console.log("You want to buy " + parseFloat(answer.amount) + " " + chosenItem);
+                            start();
+
+                        } else if (res[i].item_id == answer.itemId && res[i].stock_quantity << answer.amount) {
+                            console.log("Sorry we don't have enough " + chosenItem + ". There are only " + res[i].stock_quantity + " available.");
+                            start();
+                        }
+
+                    }
+                });
+        });
+};
 
 
-        connection.end();
+
+
+
+connection.end();
     });
 
 
@@ -81,7 +81,7 @@ connection.connect(function (err) {
 
 
 
-  
+
 // 5. Then create a Node application called `bamazonCustomer.js`. Running this application will first display all of the items available for sale. Include the ids, names, and prices of products for sale.
 
 // 6. The app should then prompt users with two messages.
